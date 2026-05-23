@@ -248,11 +248,64 @@ export const fetchFundData = async (c) => {
               holdings.push({ code, name, weight, change: null });
             }
           }
+          // ===== 附加持仓市场元信息：从东方财富原始HTML中识别境外股 =====
           holdings = holdings.slice(0, 10);
-          const needQuotes = holdings.filter(h => /^\d{6}$/.test(h.code) || /^\d{5}$/.test(h.code));
+          try {
+            const dataRowsHtml = (html.match(/<tr[\s\S]*?<\/tr>/gi) || []).slice(1, 11);
+            dataRowsHtml.forEach((rowHtml, idx) => {
+              if (idx >= holdings.length) return;
+              const tds = (rowHtml.match(/<td[^>]*>([\s\S]*?)<\/td>/gi) || []);
+              if (tds.length < 2) return;
+              const codeTd = tds[1];
+              // 1) 检查 unify href（港股/美股）
+              const unifyMatch = codeTd.match(/unify\/r\/(\d+)\.([\w.]+)/);
+              if (unifyMatch) {
+                const marketId = unifyMatch[1];
+                const sym = unifyMatch[2];
+                if (marketId === '116') {
+                  holdings[idx]._market = 'hk';
+                  holdings[idx]._stockCode = sym;
+                } else if (marketId === '106' || marketId === '105') {
+                  holdings[idx]._market = 'us';
+                  holdings[idx]._stockCode = sym;
+                }
+                return;
+              }
+              // 2) 检查 data-texch 为空的纯数字代码
+              const spanMatch = codeTd.match(/<span[^>]+data-texch=['"](.*?)['"][^>]*>([^<]+)<\/span>/);
+              if (spanMatch) {
+                const rawCode = spanMatch[2].trim();
+                // data-texch 为空 → 非A股（东财A股会填交易所）
+                // 台股：4-5位纯数字
+                if (/^\d{4,5}$/.test(rawCode)) {
+                  holdings[idx]._market = 'tw';
+                  holdings[idx]._stockCode = rawCode;
+                }
+                // 韩股：6位数字以00/09开头
+                if (/^\d{6}$/.test(rawCode) && (rawCode.startsWith('00') || rawCode.startsWith('09'))) {
+                  holdings[idx]._market = 'kr';
+                  holdings[idx]._stockCode = rawCode;
+                }
+                // 日股：XXXXJP格式
+                if (/^\d{4}JP$/.test(rawCode)) {
+                  holdings[idx]._market = 'jp';
+                  holdings[idx]._stockCode = rawCode.replace('JP', '.T');
+                }
+              }
+            });
+          } catch (e) {
+            // 市场识别失败，不影响核心数据
+          }
+
+          // ===== 获取重仓股行情 =====
+          const needQuotes = holdings.filter(h => /^\d{6}$/.test(h.code) || /^\d{5}$/.test(h.code) || h._market);
           if (needQuotes.length) {
             try {
+              // 构建腾讯行情代码列表
               const tencentCodes = needQuotes.map(h => {
+                if (h._market === 'hk') return `s_hk${h._stockCode || h.code}`;
+                if (h._market === 'us') return `us${h._stockCode || h.code}`;
+                if (h._market === 'tw' || h._market === 'kr' || h._market === 'jp') return null;
                 const cd = String(h.code || '');
                 if (/^\d{6}$/.test(cd)) {
                   const pfx = cd.startsWith('6') || cd.startsWith('9') ? 'sh' : ((cd.startsWith('4') || cd.startsWith('8')) ? 'bj' : 'sz');
@@ -263,44 +316,94 @@ export const fetchFundData = async (c) => {
                 }
                 return null;
               }).filter(Boolean).join(',');
-              if (!tencentCodes) {
-                resolveH(holdings);
-                return;
+
+              const quotePromises = [];
+
+              // 1) 腾讯行情拉取（A股/港股/美股）
+              if (tencentCodes) {
+                quotePromises.push(new Promise((resQuote) => {
+                  const scriptQuote = document.createElement('script');
+                  scriptQuote.src = `https://qt.gtimg.cn/q=${tencentCodes}`;
+                  scriptQuote.onload = () => {
+                    needQuotes.forEach(h => {
+                      let varName = '';
+                      if (h._market === 'hk') {
+                        varName = `v_s_hk${h._stockCode || h.code}`;
+                      } else if (h._market === 'us') {
+                        varName = `v_us${h._stockCode || h.code}`;
+                      } else {
+                        const cd = String(h.code || '');
+                        if (/^\d{6}$/.test(cd)) {
+                          const pfx = cd.startsWith('6') || cd.startsWith('9') ? 'sh' : ((cd.startsWith('4') || cd.startsWith('8')) ? 'bj' : 'sz');
+                          varName = `v_s_${pfx}${cd}`;
+                        } else if (/^\d{5}$/.test(cd)) {
+                          varName = `v_s_hk${cd}`;
+                        } else {
+                          return;
+                        }
+                      }
+                      if (!varName) return;
+                      const dataStr = window[varName];
+                      if (dataStr) {
+                        const parts = dataStr.split('~');
+                        // 美股us: 第5个字段是涨跌幅(按百分比)
+                        if (h._market === 'us' && parts.length > 5) {
+                          h.change = parseFloat(parts[5]);
+                        } else if (parts.length > 30) {
+                          // A股: 涨跌幅在第31个字段；港股类似
+                          const changePct = parseFloat(parts[5]);
+                          if (!isNaN(changePct)) {
+                            h.change = changePct;
+                          }
+                        } else if (parts.length > 5) {
+                          const changePct = parseFloat(parts[5]);
+                          if (!isNaN(changePct)) {
+                            h.change = changePct;
+                          }
+                        }
+                      }
+                    });
+                    if (document.body.contains(scriptQuote)) document.body.removeChild(scriptQuote);
+                    resQuote();
+                  };
+                  scriptQuote.onerror = () => {
+                    if (document.body.contains(scriptQuote)) document.body.removeChild(scriptQuote);
+                    resQuote();
+                  };
+                  document.body.appendChild(scriptQuote);
+                }));
               }
-              const quoteUrl = `https://qt.gtimg.cn/q=${tencentCodes}`;
-              await new Promise((resQuote) => {
-                const scriptQuote = document.createElement('script');
-                scriptQuote.src = quoteUrl;
-                scriptQuote.onload = () => {
-                  needQuotes.forEach(h => {
-                    const cd = String(h.code || '');
-                    let varName = '';
-                    if (/^\d{6}$/.test(cd)) {
-                      const pfx = cd.startsWith('6') || cd.startsWith('9') ? 'sh' : ((cd.startsWith('4') || cd.startsWith('8')) ? 'bj' : 'sz');
-                      varName = `v_s_${pfx}${cd}`;
-                    } else if (/^\d{5}$/.test(cd)) {
-                      varName = `v_s_hk${cd}`;
-                    } else {
-                      return;
-                    }
-                    const dataStr = window[varName];
-                    if (dataStr) {
-                      const parts = dataStr.split('~');
-                      if (parts.length > 5) {
-                        h.change = parseFloat(parts[5]);
+
+              // 2) 境外台/韩/日股 → 通过 API Route 代理获取行情涨跌幅（新浪接口）
+              const crossBorder = needQuotes.filter(h => h._market === 'tw' || h._market === 'kr' || h._market === 'jp');
+              if (crossBorder.length > 0) {
+                quotePromises.push((async () => {
+                  try {
+                    const toQuoteKey = (h) => {
+                      const raw = h._stockCode || h.code;
+                      return `${raw}:${h._market}`;
+                    };
+                    const codes = crossBorder.map(toQuoteKey).join(',');
+                    const resp = await fetch(`/api/stock-quote?codes=${encodeURIComponent(codes)}`);
+                    if (resp.ok) {
+                      const json = await resp.json();
+                      if (json.success && json.data) {
+                        crossBorder.forEach(h => {
+                          const key = toQuoteKey(h);
+                          const result = json.data[key];
+                          h.change = (result && typeof result.change === 'number') ? result.change : null;
+                        });
+                        return;
                       }
                     }
-                  });
-                  if (document.body.contains(scriptQuote)) document.body.removeChild(scriptQuote);
-                  resQuote();
-                };
-                scriptQuote.onerror = () => {
-                  if (document.body.contains(scriptQuote)) document.body.removeChild(scriptQuote);
-                  resQuote();
-                };
-                document.body.appendChild(scriptQuote);
-              });
+                  } catch (e) { /* 代理请求失败 */ }
+                  crossBorder.forEach(h => { h.change = null; });
+                })());
+              }
+
+              await Promise.all(quotePromises);
             } catch (e) {
+              // 行情拉取失败
             }
           }
           resolveH(holdings);

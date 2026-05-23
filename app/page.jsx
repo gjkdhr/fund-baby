@@ -312,12 +312,30 @@ function TopStocksModal({ fund, onClose }) {
             {Array.isArray(fund?.holdings) && fund.holdings.length > 0 ? (
                 fund.holdings.map((h, idx) => (
                     <div className="item" key={idx} style={{ padding: '6px 0', borderBottom: idx === fund.holdings.length - 1 ? 'none' : '1px solid var(--border)' }}>
-                        <span className="name" style={{ fontWeight: 500 }}>{h.name}</span>
+                        <span className="name" style={{ fontWeight: 500 }}>
+                            {h.name}
+                            {h._market && (
+                                <span className="market-tag" style={{
+                                    display: 'inline-block',
+                                    fontSize: '10px',
+                                    padding: '0 4px',
+                                    marginLeft: '4px',
+                                    borderRadius: '3px',
+                                    background: 'rgba(255,255,255,0.15)',
+                                    color: 'rgba(255,255,255,0.6)'
+                                }}>
+                                    {h._market === 'hk' ? '港股' : h._market === 'us' ? '美股' : h._market === 'tw' ? '台股' : h._market === 'kr' ? '韩股' : h._market === 'jp' ? '日股' : ''}
+                                </span>
+                            )}
+                        </span>
                         <div className="values" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                            {typeof h.change === 'number' && (
+                            {typeof h.change === 'number' && !isNaN(h.change) && (
                                 <span className={`badge ${h.change > 0 ? 'up' : h.change < 0 ? 'down' : ''}`} style={{ fontSize: '12px', padding: '2px 6px' }}>
                                     {h.change > 0 ? '+' : ''}{h.change.toFixed(2)}%
                                 </span>
+                            )}
+                            {!h._market && typeof h.change !== 'number' && (
+                                <span className="muted" style={{ fontSize: '11px' }}>--</span>
                             )}
                             <span className="weight muted" style={{ fontSize: '12px' }}>{h.weight}</span>
                         </div>
