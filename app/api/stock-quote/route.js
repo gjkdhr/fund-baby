@@ -189,7 +189,14 @@ async function fetchStooqQuotes(codes) {
   }
 }
 
+export const dynamic = 'force-static';
+export const dynamicParams = true;
+
 export async function GET(request) {
+  // 构建时静态导出，无实际 request URL
+  if (!request || !request.url) {
+    return Response.json({ success: true, data: {} });
+  }
   const { searchParams } = new URL(request.url);
   const codesStr = searchParams.get('codes');
 
