@@ -1,0 +1,202 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - img [ref=e5]
+        - generic [ref=e8]: 养基小宝
+      - generic [ref=e9]:
+        - img "项目Github地址" [ref=e10] [cursor=pointer]
+        - button "切换到浅色模式" [ref=e11] [cursor=pointer]:
+          - img [ref=e12]
+        - generic "当前刷新频率" [ref=e18]:
+          - generic [ref=e19]: 刷新
+          - strong [ref=e20]: 30秒
+        - button "立即刷新" [ref=e21] [cursor=pointer]:
+          - img [ref=e22]
+        - button "登录" [ref=e28] [cursor=pointer]:
+          - img [ref=e29]
+    - generic [ref=e32]:
+      - region "添加基金" [ref=e33]:
+        - generic [ref=e34]:
+          - img [ref=e35]
+          - generic [ref=e37]: 添加基金
+          - generic [ref=e38]: 搜索并选择基金（支持名称或代码）
+        - generic [ref=e40]:
+          - textbox "搜索基金名称或代码..." [ref=e42]
+          - button "添加" [ref=e43] [cursor=pointer]
+      - generic [ref=e44]:
+        - generic [ref=e45]:
+          - generic [ref=e46]:
+            - generic [ref=e48]:
+              - button "全部 (2)" [ref=e90] [cursor=pointer]
+              - button "自选 (0)" [ref=e50] [cursor=pointer]
+            - button "新增分组" [ref=e51] [cursor=pointer]:
+              - img [ref=e52]
+          - generic [ref=e54]:
+            - generic [ref=e55]:
+              - button "卡片视图" [ref=e56] [cursor=pointer]:
+                - img [ref=e57]
+              - button "表格视图" [ref=e62] [cursor=pointer]:
+                - img [ref=e63]
+            - generic [ref=e66]:
+              - generic [ref=e67]:
+                - img [ref=e68]
+                - text: 排序
+              - generic [ref=e70]:
+                - button "默认" [ref=e71] [cursor=pointer]:
+                  - generic [ref=e72]: 默认
+                - button "涨跌幅" [ref=e73] [cursor=pointer]:
+                  - generic [ref=e74]: 涨跌幅
+                - button "持有收益" [ref=e75] [cursor=pointer]:
+                  - generic [ref=e76]: 持有收益
+        - generic [ref=e92]:
+          - generic [ref=e94]:
+            - generic [ref=e95]:
+              - generic [ref=e97]:
+                - button "添加自选" [ref=e98] [cursor=pointer]:
+                  - img [ref=e99]
+                - generic [ref=e101]:
+                  - generic "国富亚洲机会股票(QDII)C" [ref=e103]
+                  - generic [ref=e104]: "#021662"
+              - generic [ref=e105]:
+                - generic [ref=e106]:
+                  - generic [ref=e107]: 估值时间
+                  - strong [ref=e108]: 04-22 04:00
+                - button "删除" [ref=e110] [cursor=pointer]:
+                  - img [ref=e111]
+            - generic [ref=e115]:
+              - generic [ref=e116]:
+                - generic [ref=e117]: 持仓金额
+                - generic [ref=e118] [cursor=pointer]:
+                  - text: 未设置
+                  - img [ref=e119]
+              - generic [ref=e122]:
+                - generic [ref=e123]: 估值涨跌幅
+                - generic [ref=e124]:
+                  - generic [ref=e125]: "-0.15%"
+                  - generic [ref=e126]: "2.3844"
+            - group [ref=e127]:
+              - generic "近90日净值走势" [ref=e128] [cursor=pointer]:
+                - img [ref=e129]
+                - generic [ref=e131]: 近90日净值走势
+            - generic [ref=e132] [cursor=pointer]:
+              - img [ref=e133]
+              - generic [ref=e135]: 前10重仓股票
+              - generic [ref=e136]: 点击查看详情
+          - generic [ref=e138]:
+            - generic [ref=e139]:
+              - generic [ref=e141]:
+                - button "添加自选" [ref=e142] [cursor=pointer]:
+                  - img [ref=e143]
+                - generic [ref=e145]:
+                  - generic "国泰黄金ETF联接C" [ref=e147]
+                  - generic [ref=e148]: "#004253"
+              - generic [ref=e149]:
+                - generic [ref=e150]:
+                  - generic [ref=e151]: 估值时间
+                  - strong [ref=e152]: 05-22 15:30
+                - button "删除" [ref=e154] [cursor=pointer]:
+                  - img [ref=e155]
+            - generic [ref=e159]:
+              - generic [ref=e160]:
+                - generic [ref=e161]: 持仓金额
+                - generic [ref=e162] [cursor=pointer]:
+                  - text: 未设置
+                  - img [ref=e163]
+              - generic [ref=e166]:
+                - generic [ref=e167]: 估值涨跌幅
+                - generic [ref=e168]:
+                  - generic [ref=e169]: +0.07%
+                  - generic [ref=e170]: "3.5075"
+            - group [ref=e171]:
+              - generic "近90日净值走势" [ref=e172] [cursor=pointer]:
+                - img [ref=e173]
+                - generic [ref=e175]: 近90日净值走势
+            - generic [ref=e176] [cursor=pointer]:
+              - img [ref=e177]
+              - generic [ref=e179]: 前10重仓股票
+              - generic [ref=e180]: 点击查看详情
+    - generic [ref=e80]:
+      - paragraph [ref=e81]: 数据源：实时估值与重仓直连东方财富，仅供个人学习及参考使用，不作为任何投资建议
+      - generic [ref=e82]: 提示：不登陆个人数据保存在个人浏览器中，登陆后数据将保存在线上数据库
+      - generic [ref=e83]:
+        - generic [ref=e84]:
+          - text: 遇到任何问题或需求建议可
+          - button "点此提交反馈" [ref=e85] [cursor=pointer]
+        - button "☕ 点此请作者喝杯咖啡" [ref=e86] [cursor=pointer]:
+          - generic [ref=e87]: ☕
+          - generic [ref=e88]: 点此请作者喝杯咖啡
+    - dialog "前10重仓股票" [ref=e191]:
+      - generic [ref=e192]:
+        - generic [ref=e193]:
+          - generic [ref=e194]:
+            - generic [ref=e195]: 📈
+            - generic [ref=e196]: 前10重仓股票
+          - button [ref=e197] [cursor=pointer]:
+            - img [ref=e198]
+        - generic [ref=e200]:
+          - generic [ref=e201]: 国富亚洲机会股票(QDII)C
+          - generic [ref=e202]: "#021662"
+        - generic [ref=e203]:
+          - generic [ref=e204]:
+            - generic [ref=e205]:
+              - text: 台积电
+              - generic [ref=e206]: 台股
+            - generic [ref=e208]: 5.48%
+          - generic [ref=e209]:
+            - generic [ref=e210]:
+              - text: 三星电子
+              - generic [ref=e211]: 韩股
+            - generic [ref=e213]: 5.28%
+          - generic [ref=e214]:
+            - generic [ref=e215]:
+              - text: 阿里巴巴-W
+              - generic [ref=e216]: 港股
+            - generic [ref=e217]:
+              - generic [ref=e218]: +0.79%
+              - generic [ref=e219]: 5.03%
+          - generic [ref=e220]:
+            - generic [ref=e221]:
+              - text: 台积电
+              - generic [ref=e222]: 美股
+            - generic [ref=e223]:
+              - generic [ref=e224]: +409.43%
+              - generic [ref=e225]: 4.89%
+          - generic [ref=e226]:
+            - generic [ref=e227]:
+              - text: SK海力士
+              - generic [ref=e228]: 韩股
+            - generic [ref=e230]: 4.32%
+          - generic [ref=e231]:
+            - generic [ref=e232]:
+              - text: 欢聚
+              - generic [ref=e233]: 美股
+            - generic [ref=e234]:
+              - generic [ref=e235]: +54.82%
+              - generic [ref=e236]: 3.00%
+          - generic [ref=e237]:
+            - generic [ref=e238]:
+              - text: 联发科
+              - generic [ref=e239]: 台股
+            - generic [ref=e241]: 2.94%
+          - generic [ref=e242]:
+            - generic [ref=e243]:
+              - text: 台达电
+              - generic [ref=e244]: 台股
+            - generic [ref=e246]: 2.86%
+          - generic [ref=e247]:
+            - generic [ref=e248]:
+              - text: 智邦
+              - generic [ref=e249]: 台股
+            - generic [ref=e251]: 2.79%
+          - generic [ref=e252]:
+            - generic [ref=e253]:
+              - text: 揖斐电株式会社
+              - generic [ref=e254]: 日股
+            - generic [ref=e255]:
+              - generic [ref=e256]: +14.29%
+              - generic [ref=e257]: 2.73%
+        - button "关闭" [ref=e259] [cursor=pointer]
+  - button "Open Next.js Dev Tools" [ref=e186] [cursor=pointer]:
+    - img [ref=e187]
+  - alert [ref=e190]

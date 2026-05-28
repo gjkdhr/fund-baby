@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s \"https://web.ifzq.gtimg.cn/appstock/app/kline/mkline?param=2330,day,,2\")",
+      "Bash(python3 -m json.tool)",
+      "Bash(curl -s \"https://web.ifzq.gtimg.cn/appstock/app/kline/mkline?param=005930,day,,2\")",
+      "Bash(curl -s \"https://web.ifzq.gtimg.cn/appstock/app/kline/mkline?param=4062.T,day,,2\")",
+      "Bash(curl -sv \"https://web.ifzq.gtimg.cn/appstock/app/kline/mkline?param=2330,day,,2\")",
+      "Bash(curl *)",
+      "Bash(npm run *)",
+      "mcp__plugin_playwright_playwright__browser_navigate",
+      "mcp__plugin_playwright_playwright__browser_snapshot",
+      "mcp__plugin_playwright_playwright__browser_type",
+      "mcp__plugin_playwright_playwright__browser_run_code_unsafe",
+      "mcp__plugin_playwright_playwright__browser_click",
+      "mcp__plugin_playwright_playwright__browser_network_requests",
+      "mcp__plugin_playwright_playwright__browser_console_messages",
+      "mcp__plugin_playwright_playwright__browser_evaluate",
+      "WebSearch",
+      "Bash(npx next *)",
+      "mcp__plugin_playwright_playwright__browser_network_request",
+      "WebFetch(domain:mp.weixin.qq.com)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); r=d['chart']['result'][0]; print\\('price:', r['meta']['regularMarketPrice'], 'prev:', r['meta']['previousClose']\\)\")",
+      "Bash(python3 -c ' *)",
+      "WebFetch(domain:deepwiki.com)",
+      "WebFetch(domain:docs.itick.org)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:pypi.org)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "mcp__plugin_playwright_playwright__browser_close"
+    ]
+  }
+}

@@ -346,9 +346,9 @@ export const fetchFundData = async (c) => {
                       const dataStr = window[varName];
                       if (dataStr) {
                         const parts = dataStr.split('~');
-                        // 美股us: 第5个字段是涨跌幅(按百分比)
-                        if (h._market === 'us' && parts.length > 5) {
-                          h.change = parseFloat(parts[5]);
+                        if (h._market === 'us' && parts.length > 32) {
+                          // 美股：涨跌幅在 parts[32]（parts[5] 是开盘价）
+                          h.change = parseFloat(parts[32]);
                         } else if (parts.length > 30) {
                           // A股: 涨跌幅在第31个字段；港股类似
                           const changePct = parseFloat(parts[5]);
@@ -452,6 +452,31 @@ export const fetchFundData = async (c) => {
           }
         }
         const { historyTrend, yesterdayChange } = trendData || {};
+
+        // ===== 基于持仓行情自估算净值涨跌幅 =====
+        if (Array.isArray(holdings) && holdings.length > 0) {
+          let weightedSum = 0;
+          let weightTotal = 0;
+          for (const h of holdings) {
+            const w = parseFloat(h.weight);
+            const chg = parseFloat(h.change);
+            if (!isNaN(w) && w > 0 && !isNaN(chg)) {
+              weightedSum += w * chg;
+              weightTotal += w;
+            }
+          }
+          if (weightTotal > 0) {
+            const estGszzl = Math.round(weightedSum / weightTotal * 100) / 100;
+            const estPricedCoverage = Math.round(weightTotal) / 100;
+            const dwjzNum = parseFloat(gzData.dwjz);
+            if (!isNaN(dwjzNum) && dwjzNum > 0) {
+              gzData.estGszzl = estGszzl;
+              gzData.estPricedCoverage = estPricedCoverage;
+              gzData.estGsz = Math.round(dwjzNum * (1 + estGszzl / 100) * 10000) / 10000;
+            }
+          }
+        }
+
         resolve({ ...gzData, holdings, historyTrend, yesterdayChange });
       });
     };

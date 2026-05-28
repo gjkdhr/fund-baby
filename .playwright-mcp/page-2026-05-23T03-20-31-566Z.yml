@@ -1,0 +1,479 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - link "Google 财经 Beta 版 Beta 版" [ref=e4] [cursor=pointer]:
+      - /url: ./
+      - generic [ref=e5]:
+        - img [ref=e6]
+        - heading "Google 财经 Beta 版" [level=1] [ref=e8]: 财经
+        - generic [ref=e9]: Beta 版
+    - search [ref=e10]:
+      - button "搜索股票、ETF 等" [ref=e12]:
+        - generic [ref=e14]:
+          - generic [ref=e16]: search_spark
+          - generic [ref=e17]:
+            - generic [ref=e18]: 搜
+            - generic [ref=e19]: 索
+            - generic [ref=e20]: 股
+            - generic [ref=e21]: 票
+            - generic [ref=e22]: 、
+            - generic [ref=e23]: E
+            - generic [ref=e24]: T
+            - generic [ref=e25]: F
+            - generic [ref=e27]: 等
+    - generic [ref=e28]:
+      - generic [ref=e32]:
+        - button "设置" [ref=e33] [cursor=pointer]:
+          - generic [ref=e35]: settings
+        - tooltip [ref=e37]: 设置
+      - generic [ref=e38]:
+        - generic [ref=e39] [cursor=pointer]:
+          - generic [ref=e41]: feedback
+          - generic "发送反馈" [ref=e42]
+        - tooltip [ref=e43]: 发送反馈
+      - link "登录" [ref=e49] [cursor=pointer]:
+        - /url: https://accounts.google.com/ServiceLogin?passive=1209600&continue=https://www.google.com/finance/beta/quote/2330:TPE&followup=https://www.google.com/finance/beta/quote/2330:TPE&ec=GAZA4AU
+  - generic:
+    - generic:
+      - region "列表":
+        - generic [ref=e51] [cursor=pointer]:
+          - generic [ref=e53]:
+            - heading "列表" [level=2] [ref=e55]
+            - tooltip [ref=e56]: 新建列表
+            - tooltip [ref=e57]: 展开
+          - table "股票板块" [ref=e62]:
+            - rowgroup
+            - rowgroup [ref=e63]:
+              - row "SIXB +0.47%" [ref=e64]:
+                - cell "SIXB +0.47%" [ref=e65]:
+                  - generic [ref=e66]: SIXB
+                  - generic [ref=e67]:
+                    - generic [ref=e68]: +0.47%
+                    - generic [ref=e70]: arrow_upward
+              - row "SIXC -0.54%" [ref=e71]:
+                - cell "SIXC -0.54%" [ref=e72]:
+                  - generic [ref=e73]: SIXC
+                  - generic [ref=e74]:
+                    - generic [ref=e75]: "-0.54%"
+                    - generic [ref=e77]: arrow_downward
+              - row "SIXE +0.54%" [ref=e78]:
+                - cell "SIXE +0.54%" [ref=e79]:
+                  - generic [ref=e80]: SIXE
+                  - generic [ref=e81]:
+                    - generic [ref=e82]: +0.54%
+                    - generic [ref=e84]: arrow_upward
+              - row "SIXI +0.68%" [ref=e85]:
+                - cell "SIXI +0.68%" [ref=e86]:
+                  - generic [ref=e87]: SIXI
+                  - generic [ref=e88]:
+                    - generic [ref=e89]: +0.68%
+                    - generic [ref=e91]: arrow_upward
+              - row "SIXM +0.33%" [ref=e92]:
+                - cell "SIXM +0.33%" [ref=e93]:
+                  - generic [ref=e94]: SIXM
+                  - generic [ref=e95]:
+                    - generic [ref=e96]: +0.33%
+                    - generic [ref=e98]: arrow_upward
+              - row "SIXR +0.16%" [ref=e99]:
+                - cell "SIXR +0.16%" [ref=e100]:
+                  - generic [ref=e101]: SIXR
+                  - generic [ref=e102]:
+                    - generic [ref=e103]: +0.16%
+                    - generic [ref=e105]: arrow_upward
+              - row "SIXRE +0.11%" [ref=e106]:
+                - cell "SIXRE +0.11%" [ref=e107]:
+                  - generic [ref=e108]: SIXRE
+                  - generic [ref=e109]:
+                    - generic [ref=e110]: +0.11%
+                    - generic [ref=e112]: arrow_upward
+              - row "SIXT +1.02%" [ref=e113]:
+                - cell "SIXT +1.02%" [ref=e114]:
+                  - generic [ref=e115]: SIXT
+                  - generic [ref=e116]:
+                    - generic [ref=e117]: +1.02%
+                    - generic [ref=e119]: arrow_upward
+              - row "SIXU +0.80%" [ref=e120]:
+                - cell "SIXU +0.80%" [ref=e121]:
+                  - generic [ref=e122]: SIXU
+                  - generic [ref=e123]:
+                    - generic [ref=e124]: +0.80%
+                    - generic [ref=e126]: arrow_upward
+              - row "SIXV +1.19%" [ref=e127]:
+                - cell "SIXV +1.19%" [ref=e128]:
+                  - generic [ref=e129]: SIXV
+                  - generic [ref=e130]:
+                    - generic [ref=e131]: +1.19%
+                    - generic [ref=e133]: arrow_upward
+              - row "SIXY +0.41%" [ref=e134]:
+                - cell "SIXY +0.41%" [ref=e135]:
+                  - generic [ref=e136]: SIXY
+                  - generic [ref=e137]:
+                    - generic [ref=e138]: +0.41%
+                    - generic [ref=e140]: arrow_upward
+  - generic [ref=e150]:
+    - generic "2330:TPE" [ref=e153]
+    - generic [ref=e155]:
+      - button "添加到列表" [disabled]:
+        - generic:
+          - generic: check_indeterminate_small
+        - generic: 添加到列表
+        - generic:
+          - img
+    - generic [ref=e159]:
+      - generic [ref=e161]:
+        - generic [ref=e163]: 台湾积体电路制造公司
+        - generic [ref=e165]:
+          - generic [ref=e166]:
+            - generic [ref=e168]: $2,255.00
+            - generic [ref=e169]:
+              - generic [ref=e171]: arrow_upward
+              - generic [ref=e172]: +1.12%
+              - generic [ref=e175]:
+                - text: (
+                - generic [ref=e176]: "+25.00"
+                - text: ) 今天
+          - generic [ref=e177]: 5月22日, UTC+8 13:30:12 · TWD
+      - generic [ref=e178]:
+        - generic [ref=e180]:
+          - button "选择图表类型 - 已选择面积图" [ref=e184] [cursor=pointer]:
+            - generic [ref=e187]: area_chart
+            - generic [ref=e188]: 面积图
+            - img [ref=e190]
+          - button "与金融实体进行比较" [ref=e197] [cursor=pointer]:
+            - generic [ref=e200]: stacked_line_chart
+            - generic [ref=e201]: 比较
+            - img [ref=e203]
+          - button "选择技术指标" [ref=e209] [cursor=pointer]:
+            - generic [ref=e212]: monitoring
+            - generic [ref=e213]: 指标
+            - img [ref=e215]
+        - generic [ref=e220]:
+          - img [ref=e221]:
+            - generic [ref=e222]:
+              - generic [ref=e224]:
+                - generic [ref=e226]: 2,230
+                - generic [ref=e228]: 2,240
+                - generic [ref=e230]: 2,250
+                - generic [ref=e232]: 2,260
+              - generic [ref=e234]:
+                - generic [ref=e237]: 09:00
+                - generic [ref=e239]: 10:00
+                - generic [ref=e241]: 11:00
+                - generic [ref=e243]: 12:00
+                - generic [ref=e245]: 13:00
+          - generic [ref=e785]: 昨收：$2,230.00
+        - tablist "股票图表标签页" [ref=e792]:
+          - tab "1 天" [selected] [ref=e793] [cursor=pointer]
+          - tab "5 天" [ref=e794] [cursor=pointer]
+          - tab "1 个月" [ref=e795] [cursor=pointer]
+          - tab "6 个月" [ref=e796] [cursor=pointer]
+          - tab "年初至今" [ref=e797] [cursor=pointer]
+          - tab "1 年" [ref=e798] [cursor=pointer]
+          - tab "5 年" [ref=e799] [cursor=pointer]
+          - tab "最大" [ref=e800] [cursor=pointer]
+    - generic [ref=e803]:
+      - tablist [ref=e804]:
+        - generic [ref=e808]:
+          - tab "概览" [selected] [ref=e809] [cursor=pointer]:
+            - generic:
+              - generic: 概览
+          - tab "财报" [ref=e810] [cursor=pointer]:
+            - generic:
+              - generic: 财报
+          - tab "财务" [ref=e811] [cursor=pointer]:
+            - generic:
+              - generic: 财务
+      - tabpanel "概览" [ref=e812]:
+        - generic [ref=e814]:
+          - generic [ref=e818]:
+            - generic [ref=e819]:
+              - generic [ref=e820]:
+                - generic [ref=e822]: insights_auto
+                - generic [ref=e825]: Taiwan Semiconductor Manufacturing Co Ltd 在过去一个月表现强劲，股价创下历史新高。这主要归功于第一季度财报大幅超预期以及 2026 全年营收指引的调高。分析师普遍预计，在 AI 芯片和 2 纳米技术领先优势的推动下，下季度将继续保持高增长态势。
+              - button "收起" [ref=e827] [cursor=pointer]:
+                - generic [ref=e829]: keyboard_arrow_down
+            - generic [ref=e832]: Taiwan Semiconductor Manufacturing Co Ltd 在过去一个月表现强劲，股价创下历史新高。这主要归功于第一季度财报大幅超预期以及 2026 全年营收指引的调高。分析师普遍预计，在 AI 芯片和 2 纳米技术领先优势的推动下，下季度将继续保持高增长态势。
+            - generic [ref=e833]:
+              - generic [ref=e834]:
+                - generic [ref=e835]:
+                  - generic [ref=e837]: trending_up
+                  - text: 看涨观点
+                - list [ref=e839]:
+                  - listitem [ref=e840]:
+                    - generic [ref=e841]:
+                      - generic "借助 AI 深入探索" [ref=e843] [cursor=pointer]: "业绩大超预期并调高全年指引:"
+                      - text: 公司 2026 年第一季度营收达 1.13 万亿新台币，同比增长 35.1%，净利润增长 58.3%。由于 AI 相关需求旺盛，管理层将 2026 全年营收增长目标上调至 30% 以上，并预计第二季度毛利率将维持在 65.5% 至 67.5% 的高位。
+                  - listitem [ref=e844]:
+                    - generic [ref=e845]:
+                      - generic "借助 AI 深入探索" [ref=e847] [cursor=pointer]: "先进制程主导地位与技术突破:"
+                      - text: 7 纳米及更先进制程已占晶圆总营收的 74%，其中 3 纳米贡献占比提升至 25%。公司近期展示了 A13 等下一代 1.3 纳米级制程技术，进一步扩大了与竞争对手的技术差距，确保了来自苹果和英伟达等大客户的长期订单。
+                  - listitem [ref=e848]:
+                    - generic [ref=e849]:
+                      - generic "借助 AI 深入探索" [ref=e851] [cursor=pointer]: "强劲的资本支出与市场增量:"
+                      - text: 公司计划 2026 年资本支出维持在 520 亿至 560 亿美元的高端水平，显示出对长期需求的极强信心。此外，台湾近期放宽了本地基金投资限制，监管政策的利好也为股价冲向新高提供了流动性支持。
+              - generic [ref=e852]:
+                - generic [ref=e853]:
+                  - generic [ref=e855]: trending_down
+                  - text: 看跌观点
+                - list [ref=e857]:
+                  - listitem [ref=e858]:
+                    - generic [ref=e859]:
+                      - generic "借助 AI 深入探索" [ref=e861] [cursor=pointer]: "地缘政治与供应链集中风险:"
+                      - text: 尽管公司积极在亚利桑那等地扩张，但其最先进的生产基地仍集中在台湾。分析师指出，地缘政治紧张局势依然是投资者的核心担忧，任何潜在的供应中断都可能对全球科技供应链造成灾难性打击。
+                  - listitem [ref=e862]:
+                    - generic [ref=e863]:
+                      - generic "借助 AI 深入探索" [ref=e865] [cursor=pointer]: "估值水平与市场波动性担忧:"
+                      - text: 随着股价触及历史高位，部分财务模型显示其可能被高估。尽管盈利前景乐观，但市场对 AI 支出可能放缓的担忧以及期权市场流露出的看跌情绪，暗示在经历近期暴涨后，股价可能面临短期波动或回调压力。
+          - generic [ref=e870]:
+            - generic [ref=e871]:
+              - generic [ref=e872]:
+                - generic [ref=e873]: 开盘价
+                - generic [ref=e874]: $2,245.00
+              - generic [ref=e875]:
+                - generic [ref=e876]: 最高价
+                - generic [ref=e877]: $2,260.00
+              - generic [ref=e878]:
+                - generic [ref=e879]: 最低价
+                - generic [ref=e880]: $2,225.00
+              - generic [ref=e881]:
+                - generic [ref=e882]: 市值
+                - generic [ref=e883]: 58.48万亿
+              - generic [ref=e884]:
+                - generic [ref=e885]: 平均成交量
+                - generic [ref=e886]: 3,894.04万
+            - generic [ref=e887]:
+              - generic [ref=e888]:
+                - generic [ref=e889]: 成交量
+                - generic [ref=e890]: 2,626.26万
+              - generic [ref=e891]:
+                - generic [ref=e892]: 股息
+                - generic [ref=e893]: 0.98%
+              - generic [ref=e894]:
+                - generic [ref=e895]: 季度股息
+                - generic [ref=e896]: $5.50
+              - generic [ref=e897]:
+                - generic [ref=e898]: 除息日
+                - generic [ref=e899]: 2026年9月16日
+              - generic [ref=e900]:
+                - generic [ref=e901]: 市盈率
+                - generic [ref=e902]: "29.87"
+            - generic [ref=e903]:
+              - generic [ref=e904]:
+                - generic [ref=e905]: 52 周最高价
+                - generic [ref=e906]: $2,345.00
+              - generic [ref=e907]:
+                - generic [ref=e908]: 52 周最低价
+                - generic [ref=e909]: $946.00
+              - generic [ref=e910]:
+                - generic [ref=e911]: 每股收益
+                - generic [ref=e912]: $75.50
+              - generic [ref=e913]:
+                - generic [ref=e914]: 流通股数
+                - generic [ref=e915]: 259.30亿
+              - generic [ref=e916]:
+                - generic [ref=e917]: 员工人数
+                - generic [ref=e918]: 8万
+          - generic [ref=e920]:
+            - generic [ref=e921]: 相关股票
+            - generic [ref=e922]:
+              - link "0050 元大宝来台湾卓越50证券投资信托基金 $97.30 +1.51%" [ref=e924] [cursor=pointer]:
+                - /url: ./quote/0050:TPE
+                - generic [ref=e925]:
+                  - generic [ref=e926]:
+                    - generic [ref=e927]: "0050"
+                    - generic [ref=e929]: 元大宝来台湾卓越50证券投资信托基金
+                    - generic [ref=e930]: $97.30
+                  - generic [ref=e931]:
+                    - generic [ref=e933]: +1.51%
+                    - generic [ref=e935]: arrow_upward
+              - link "2317 鸿海科技集团 $250.00 +1.01%" [ref=e939] [cursor=pointer]:
+                - /url: ./quote/2317:TPE
+                - generic [ref=e940]:
+                  - generic [ref=e941]:
+                    - generic [ref=e942]: "2317"
+                    - generic [ref=e944]: 鸿海科技集团
+                    - generic [ref=e945]: $250.00
+                  - generic [ref=e946]:
+                    - generic [ref=e948]: +1.01%
+                    - generic [ref=e950]: arrow_upward
+              - link "2454 联发科技 $3,860.00 +8.73%" [ref=e954] [cursor=pointer]:
+                - /url: ./quote/2454:TPE
+                - generic [ref=e955]:
+                  - generic [ref=e956]:
+                    - generic [ref=e957]: "2454"
+                    - generic [ref=e959]: 联发科技
+                    - generic [ref=e960]: $3,860.00
+                  - generic [ref=e961]:
+                    - generic [ref=e963]: +8.73%
+                    - generic [ref=e965]: arrow_upward
+              - link "2308 台达电子 $2,095.00 +3.20%" [ref=e969] [cursor=pointer]:
+                - /url: ./quote/2308:TPE
+                - generic [ref=e970]:
+                  - generic [ref=e971]:
+                    - generic [ref=e972]: "2308"
+                    - generic [ref=e974]: 台达电子
+                    - generic [ref=e975]: $2,095.00
+                  - generic [ref=e976]:
+                    - generic [ref=e978]: +3.20%
+                    - generic [ref=e980]: arrow_upward
+          - generic [ref=e984]:
+            - generic [ref=e985]: 新闻报道
+            - generic [ref=e986]: 来自全网
+            - generic [ref=e987]:
+              - generic [ref=e988]:
+                - generic [ref=e989]:
+                  - generic [ref=e990]:
+                    - generic [ref=e991]:
+                      - img "新唐人電視台" [ref=e993]
+                      - generic [ref=e994]: 新唐人電視台
+                      - generic [ref=e995]: ·
+                      - generic [ref=e996]: 15小时前
+                    - link "AMD蘇姿丰訪問台灣 宣布投資百億美元擴大合作" [ref=e997] [cursor=pointer]:
+                      - /url: https://www.ntdtv.com/gb/2026/05/22/a104098946.html
+                      - generic [ref=e998]: AMD蘇姿丰訪問台灣 宣布投資百億美元擴大合作
+                  - generic [ref=e999]:
+                    - generic [ref=e1000]:
+                      - img "Yahoo Finance" [ref=e1002]
+                      - generic [ref=e1003]: Yahoo Finance
+                      - generic [ref=e1004]: ·
+                      - generic [ref=e1005]: 15小时前
+                    - link "The Best AI Stock to Buy Now for Less Than $500" [ref=e1006] [cursor=pointer]:
+                      - /url: https://finance.yahoo.com/markets/stocks/articles/best-ai-stock-buy-now-113002504.html
+                      - generic [ref=e1007]: The Best AI Stock to Buy Now for Less Than $500
+                - generic [ref=e1008]:
+                  - generic [ref=e1009]:
+                    - generic [ref=e1010]:
+                      - img "marketscreener.com" [ref=e1012]
+                      - generic [ref=e1013]: marketscreener.com
+                      - generic [ref=e1014]: ·
+                      - generic [ref=e1015]: 17小时前
+                    - link "TSMC's unit TSMC Global acquires fixed-income securities for $10 mln" [ref=e1016] [cursor=pointer]:
+                      - /url: https://www.marketscreener.com/news/tsmc-s-unit-tsmc-global-acquires-fixed-income-securities-for-10-mln-ce7f5adfdc89f325
+                      - generic [ref=e1017]: TSMC's unit TSMC Global acquires fixed-income securities for $10 mln
+                  - generic [ref=e1018]:
+                    - generic [ref=e1019]:
+                      - img "Bloomberg.com" [ref=e1021]
+                      - generic [ref=e1022]: Bloomberg.com
+                      - generic [ref=e1023]: ·
+                      - generic [ref=e1024]: 21小时前
+                    - link "Investors Look Beyond TSMC as AI Boom Spreads to New Winners" [ref=e1025] [cursor=pointer]:
+                      - /url: https://www.bloomberg.com/news/articles/2026-05-21/investors-look-beyond-tsmc-as-ai-boom-spreads-to-new-winners
+                      - generic [ref=e1026]: Investors Look Beyond TSMC as AI Boom Spreads to New Winners
+                - generic [ref=e1027]:
+                  - generic [ref=e1028]:
+                    - generic [ref=e1029]:
+                      - img "Investing.com Nigeria" [ref=e1031]
+                      - generic [ref=e1032]: Investing.com Nigeria
+                      - generic [ref=e1033]: ·
+                      - generic [ref=e1034]: 1天前
+                    - link "Cathie Wood’s ARK shows bullish stock buy, trims Taiwan Semiconductor By Investing.com" [ref=e1035] [cursor=pointer]:
+                      - /url: https://ng.investing.com/news/company-news/cathie-woods-ark-shows-bullish-stock-buy-trims-taiwan-semiconductor-93CH-2525334
+                      - generic [ref=e1036]: Cathie Wood’s ARK shows bullish stock buy, trims Taiwan Semiconductor By Investing.com
+                  - generic [ref=e1037]:
+                    - generic [ref=e1038]:
+                      - img "GuruFocus" [ref=e1040]
+                      - generic [ref=e1041]: GuruFocus
+                      - generic [ref=e1042]: ·
+                      - generic [ref=e1043]: 1天前
+                    - link "Mixed Performance in Chinese Stocks as Nasdaq Golden Dragon Inde" [ref=e1044] [cursor=pointer]:
+                      - /url: https://www.gurufocus.com/news/8875737/mixed-performance-in-chinese-stocks-as-nasdaq-golden-dragon-index-falls
+                      - generic [ref=e1045]: Mixed Performance in Chinese Stocks as Nasdaq Golden Dragon Inde
+                - generic [ref=e1046]:
+                  - generic [ref=e1047]:
+                    - generic [ref=e1048]:
+                      - img "MarketBeat" [ref=e1050]
+                      - generic [ref=e1051]: MarketBeat
+                      - generic [ref=e1052]: ·
+                      - generic [ref=e1053]: 1天前
+                    - link "Taiwan Semiconductor Manufacturing Company Ltd. $TSM Shares Bought by Global Retirement Partners LLC" [ref=e1054] [cursor=pointer]:
+                      - /url: https://www.marketbeat.com/instant-alerts/filing-taiwan-semiconductor-manufacturing-company-ltd-tsm-shares-bought-by-global-retirement-partners-llc-2026-05-21/
+                      - generic [ref=e1055]: Taiwan Semiconductor Manufacturing Company Ltd. $TSM Shares Bought by Global Retirement Partners LLC
+                  - generic [ref=e1056]:
+                    - generic [ref=e1057]:
+                      - img "Simply Wall Street" [ref=e1059]
+                      - generic [ref=e1060]: Simply Wall Street
+                      - generic [ref=e1061]: ·
+                      - generic [ref=e1062]: 1天前
+                    - link "Assessing Taiwan Semiconductor Manufacturing’s Valuation After A Strong Year Of Share Price Momentum" [ref=e1063] [cursor=pointer]:
+                      - /url: https://simplywall.st/stocks/us/semiconductors/nyse-tsm/taiwan-semiconductor-manufacturing/news/assessing-taiwan-semiconductor-manufacturings-valuation-afte-5
+                      - generic [ref=e1064]: Assessing Taiwan Semiconductor Manufacturing’s Valuation After A Strong Year Of Share Price Momentum
+              - button "显示更多内容" [ref=e1065] [cursor=pointer]:
+                - text: 显示更多内容
+                - generic [ref=e1066]: keyboard_arrow_down
+          - generic [ref=e1068]:
+            - generic [ref=e1069]: 资料
+            - generic [ref=e1072]:
+              - text: 台湾积体电路制造股份有限公司是台湾一家专注于半导体芯片制造的高科技跨国企业，总部位于台湾新竹科学园区，是全球前十大企业，也是全球最领先的半导体芯片制造商。其主要业务涵盖芯片制造、封装、测试及技术服务。凭借先进的制程技术与持续创新，台积电在国际市场享有盛誉，芯片制造市占率居全球首位，为全球高科技产业的重要支柱，并为苹果、联发科、谷歌、英伟达、AMD、OpenAI等知名企业供应先进的高性能芯片，亦在人工智能、自动驾驶等尖端科技产业的发展中扮演关键角色。
+              - link "Wikipedia" [ref=e1073] [cursor=pointer]:
+                - /url: https://zh.wikipedia.org/zh-cn/%E5%8F%B0%E7%81%A3%E7%A9%8D%E9%AB%94%E9%9B%BB%E8%B7%AF%E8%A3%BD%E9%80%A0
+            - generic [ref=e1075]:
+              - generic [ref=e1076]: 台湾积体电路制造公司简介
+              - generic [ref=e1077]:
+                - generic [ref=e1078]:
+                  - generic [ref=e1079]:
+                    - generic [ref=e1080]: 首席执行官
+                    - generic [ref=e1081]: 魏哲家 | 魏哲家
+                  - generic [ref=e1082]:
+                    - generic [ref=e1083]: 员工人数
+                    - generic [ref=e1084]: 7.69万
+                  - generic [ref=e1085]:
+                    - generic [ref=e1086]: 创立日期
+                    - generic [ref=e1087]: 1987年2月21日
+                - generic [ref=e1088]:
+                  - generic [ref=e1089]:
+                    - generic [ref=e1090]: 总部
+                    - generic [ref=e1091]: Hsinchu, 台湾省, 台湾
+                  - generic [ref=e1092]:
+                    - generic [ref=e1093]: 板块
+                    - generic [ref=e1094]: "-"
+                  - generic [ref=e1095]:
+                    - generic [ref=e1096]: 网站
+                    - link "tsmc.com" [ref=e1098] [cursor=pointer]:
+                      - /url: http://www.tsmc.com/
+                      - generic [ref=e1099]: tsmc.com
+  - generic:
+    - region "“研究”面板":
+      - generic [ref=e1101]:
+        - generic [ref=e1104]:
+          - heading "研究" [level=2] [ref=e1105]
+          - generic [ref=e1106]:
+            - button "发起新消息串" [ref=e1107] [cursor=pointer]:
+              - generic [ref=e1109]: edit_square
+            - tooltip [ref=e1111]: 发起新消息串
+          - generic [ref=e1113]:
+            - button "会话历史记录" [ref=e1114] [cursor=pointer]:
+              - generic [ref=e1116]: schedule_auto
+            - tooltip [ref=e1118]: 会话历史记录
+          - tooltip [ref=e1119]: 收起
+          - generic [ref=e1120]:
+            - button "展开 研究" [ref=e1121] [cursor=pointer]:
+              - generic [ref=e1123]: expand_content
+            - tooltip [ref=e1125]: 展开
+        - search [ref=e1130]:
+          - button "搜索股票、ETF 等" [ref=e1132]:
+            - generic [ref=e1133]:
+              - combobox [ref=e1134]:
+                - textbox "提出任何问题" [ref=e1135]
+              - generic [ref=e1136]:
+                - generic [ref=e1141]:
+                  - button "添加工具" [ref=e1142] [cursor=pointer]:
+                    - generic [ref=e1144]: add
+                  - tooltip [ref=e1146]: 添加工具
+                - generic [ref=e1148]:
+                  - button "问问 AI" [disabled] [ref=e1149]:
+                    - generic [ref=e1151]: arrow_upward
+                  - tooltip [ref=e1153]: 问问 AI
+  - generic [ref=e1155]:
+    - generic [ref=e1156]:
+      - text: AI 内容可能包含错误。
+      - link "了解详情" [ref=e1157] [cursor=pointer]:
+        - /url: https://support.google.com/websearch?p=googlefinancebeta
+    - generic [ref=e1158]:
+      - link "帮助" [ref=e1159] [cursor=pointer]:
+        - /url: https://support.google.com/websearch?p=googlefinancebeta
+      - generic [ref=e1160] [cursor=pointer]: 发送反馈
+      - link "隐私权" [ref=e1161] [cursor=pointer]:
+        - /url: https://policies.google.com/privacy
+      - link "条款" [ref=e1162] [cursor=pointer]:
+        - /url: https://policies.google.com/terms
+      - link "免责声明" [ref=e1163] [cursor=pointer]:
+        - /url: https://www.google.com/googlefinance/disclaimer/

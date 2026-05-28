@@ -1,0 +1,132 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - img [ref=e5]
+        - generic [ref=e8]: 养基小宝
+      - generic [ref=e9]:
+        - img "项目Github地址" [ref=e10] [cursor=pointer]
+        - button "切换到浅色模式" [ref=e11] [cursor=pointer]:
+          - img [ref=e12]
+        - generic "当前刷新频率" [ref=e18]:
+          - generic [ref=e19]: 刷新
+          - strong [ref=e20]: 30秒
+        - button "立即刷新" [ref=e21] [cursor=pointer]:
+          - img [ref=e22]
+        - button "登录" [ref=e28] [cursor=pointer]:
+          - img [ref=e29]
+    - generic [ref=e32]:
+      - region "添加基金" [ref=e33]:
+        - generic [ref=e34]:
+          - img [ref=e35]
+          - generic [ref=e37]: 添加基金
+          - generic [ref=e38]: 搜索并选择基金（支持名称或代码）
+        - generic [ref=e40]:
+          - textbox "搜索基金名称或代码..." [ref=e42]
+          - button "添加" [ref=e43] [cursor=pointer]
+      - generic [ref=e44]:
+        - generic [ref=e45]:
+          - generic [ref=e46]:
+            - generic [ref=e48]:
+              - button "全部 (2)" [ref=e98] [cursor=pointer]
+              - button "自选 (0)" [ref=e50] [cursor=pointer]
+            - button "新增分组" [ref=e51] [cursor=pointer]:
+              - img [ref=e52]
+          - generic [ref=e54]:
+            - generic [ref=e55]:
+              - button "卡片视图" [ref=e56] [cursor=pointer]:
+                - img [ref=e57]
+              - button "表格视图" [ref=e62] [cursor=pointer]:
+                - img [ref=e63]
+            - generic [ref=e66]:
+              - generic [ref=e67]:
+                - img [ref=e68]
+                - text: 排序
+              - generic [ref=e70]:
+                - button "默认" [ref=e71] [cursor=pointer]:
+                  - generic [ref=e72]: 默认
+                - button "涨跌幅" [ref=e73] [cursor=pointer]:
+                  - generic [ref=e74]: 涨跌幅
+                - button "持有收益" [ref=e75] [cursor=pointer]:
+                  - generic [ref=e76]: 持有收益
+        - generic [ref=e100]:
+          - generic [ref=e102]:
+            - generic [ref=e103]:
+              - generic [ref=e105]:
+                - button "添加自选" [ref=e106] [cursor=pointer]:
+                  - img [ref=e107]
+                - generic [ref=e109]:
+                  - generic "国富亚洲机会股票(QDII)C" [ref=e111]
+                  - generic [ref=e112]: "#021662"
+              - generic [ref=e113]:
+                - generic [ref=e114]:
+                  - generic [ref=e115]: 估值时间
+                  - strong [ref=e116]: 04-22 04:00
+                - button "删除" [ref=e118] [cursor=pointer]:
+                  - img [ref=e119]
+            - generic [ref=e123]:
+              - generic [ref=e124]:
+                - generic [ref=e125]: 持仓金额
+                - generic [ref=e126] [cursor=pointer]:
+                  - text: 未设置
+                  - img [ref=e127]
+              - generic [ref=e130]:
+                - generic [ref=e131]: 估值涨跌幅
+                - generic [ref=e132]:
+                  - generic [ref=e133]: +0.75%
+                  - generic [ref=e134]: "2.8647"
+            - group [ref=e135]:
+              - generic "近90日净值走势" [ref=e136] [cursor=pointer]:
+                - img [ref=e137]
+                - generic [ref=e139]: 近90日净值走势
+            - generic [ref=e140]: 基于 25% 持仓估算
+            - generic [ref=e141] [cursor=pointer]:
+              - img [ref=e142]
+              - generic [ref=e144]: 前10重仓股票
+              - generic [ref=e145]: 点击查看详情
+          - generic [ref=e147]:
+            - generic [ref=e148]:
+              - generic [ref=e150]:
+                - button "添加自选" [ref=e151] [cursor=pointer]:
+                  - img [ref=e152]
+                - generic [ref=e154]:
+                  - generic "国泰黄金ETF联接C" [ref=e156]
+                  - generic [ref=e157]: "#004253"
+              - generic [ref=e158]:
+                - generic [ref=e159]:
+                  - generic [ref=e160]: 估值时间
+                  - strong [ref=e161]: 05-22 15:30
+                - button "删除" [ref=e163] [cursor=pointer]:
+                  - img [ref=e164]
+            - generic [ref=e168]:
+              - generic [ref=e169]:
+                - generic [ref=e170]: 持仓金额
+                - generic [ref=e171] [cursor=pointer]:
+                  - text: 未设置
+                  - img [ref=e172]
+              - generic [ref=e175]:
+                - generic [ref=e176]: 估值涨跌幅
+                - generic [ref=e177]:
+                  - generic [ref=e178]: +0.07%
+                  - generic [ref=e179]: "3.5075"
+            - group [ref=e180]:
+              - generic "近90日净值走势" [ref=e181] [cursor=pointer]:
+                - img [ref=e182]
+                - generic [ref=e184]: 近90日净值走势
+            - generic [ref=e185] [cursor=pointer]:
+              - img [ref=e186]
+              - generic [ref=e188]: 前10重仓股票
+              - generic [ref=e189]: 点击查看详情
+    - generic [ref=e80]:
+      - paragraph [ref=e81]: 数据源：实时估值与重仓直连东方财富，仅供个人学习及参考使用，不作为任何投资建议
+      - generic [ref=e82]: 提示：不登陆个人数据保存在个人浏览器中，登陆后数据将保存在线上数据库
+      - generic [ref=e83]:
+        - generic [ref=e84]:
+          - text: 遇到任何问题或需求建议可
+          - button "点此提交反馈" [ref=e85] [cursor=pointer]
+        - button "☕ 点此请作者喝杯咖啡" [ref=e86] [cursor=pointer]:
+          - generic [ref=e87]: ☕
+          - generic [ref=e88]: 点此请作者喝杯咖啡
+  - button "Open Next.js Dev Tools" [ref=e94] [cursor=pointer]:
+    - img [ref=e95]
+  - alert [ref=e190]
