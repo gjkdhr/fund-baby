@@ -41,18 +41,61 @@ async function fetchYahooQuote(symbol) {
 }
 
 /**
+ * 通过 HTTP 代理（Clash 7899 CONNECT 隧道）发送 HTTPS GET 请求
+ * 用于访问台交所等无法直连的境外接口
+ */
+async function fetchViaHttpProxy(url, proxyPort = 7899) {
+  const { request: httpReq } = await import('node:http');
+  const { request: httpsReq } = await import('node:https');
+  
+  return new Promise((resolve, reject) => {
+    const urlObj = new URL(url);
+    const connectReq = httpReq({
+      hostname: '127.0.0.1',
+      port: proxyPort,
+      method: 'CONNECT',
+      path: urlObj.hostname + ':443',
+      timeout: 10000,
+    });
+
+    connectReq.on('connect', (res, socket) => {
+      if (res.statusCode !== 200) {
+        reject(new Error('CONNECT ' + res.statusCode));
+        return;
+      }
+      const tlsReq = httpsReq({
+        host: urlObj.hostname,
+        path: urlObj.pathname + urlObj.search,
+        method: 'GET',
+        socket,
+        headers: { 'User-Agent': 'Mozilla/5.0' },
+        timeout: 10000,
+      }, (tlsRes) => {
+        let body = '';
+        tlsRes.on('data', (chunk) => body += chunk);
+        tlsRes.on('end', () => {
+          try { resolve(JSON.parse(body)); }
+          catch { reject(new Error('Parse failed')); }
+        });
+      });
+      tlsReq.on('error', reject);
+      tlsReq.end();
+    });
+
+    connectReq.on('error', reject);
+    connectReq.end();
+  });
+}
+
+/**
  * 台交所行情（台股主数据源，实时）
  * codes: ["tse_2330.tw", "tse_2454.tw"] → { "2330": { change }, "2454": { change } }
+ * 注：台交所域名需走 Clash 代理（127.0.0.1:7899）
  */
 async function fetchTwseQuotes(codes) {
   try {
     const url = `https://mis.twse.com.tw/stock/api/getStockInfo.jsp?json=1&delay=0&ex_ch=${codes.join('|')}`;
-    const resp = await fetch(url, {
-      headers: { 'User-Agent': 'Mozilla/5.0' },
-      signal: AbortSignal.timeout(10000),
-    });
-    if (!resp.ok) return {};
-    const json = await resp.json();
+    const json = await fetchViaHttpProxy(url);
     const results = {};
     for (const item of json.msgArray || []) {
       const z = parseFloat(item.z);
