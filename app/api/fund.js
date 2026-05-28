@@ -379,24 +379,20 @@ export const fetchFundData = async (c) => {
               if (crossBorder.length > 0) {
                 quotePromises.push((async () => {
                   try {
-                    const toQuoteKey = (h) => {
-                      const raw = h._stockCode || h.code;
-                      return `${raw}:${h._market}`;
-                    };
-                    const codes = crossBorder.map(toQuoteKey).join(',');
-                    const resp = await fetch(`/api/stock-quote?codes=${encodeURIComponent(codes)}`);
-                    if (resp.ok) {
-                      const json = await resp.json();
-                      if (json.success && json.data) {
-                        crossBorder.forEach(h => {
-                          const key = toQuoteKey(h);
-                          const result = json.data[key];
-                          h.change = (result && typeof result.change === 'number') ? result.change : null;
-                        });
-                        return;
-                      }
+                    const results = await fetchCrossBorderQuotes(crossBorder);
+                    if (results) {
+                      const toQuoteKey = (h) => {
+                        const raw = h._stockCode || h.code;
+                        return `${raw}:${h._market}`;
+                      };
+                      crossBorder.forEach(h => {
+                        const key = toQuoteKey(h);
+                        const result = results[key];
+                        h.change = (result && typeof result.change === 'number') ? result.change : null;
+                      });
+                      return;
                     }
-                  } catch (e) { /* 代理请求失败 */ }
+                  } catch (e) { /* 境外行情请求失败 */ }
                   crossBorder.forEach(h => { h.change = null; });
                 })());
               }
@@ -614,3 +610,110 @@ export const fetchIntradayData = async (code) => {
         return null;
     }
 };
+
+/**
+ * 获取境外（台/韩/日）股票实时涨幅
+ * 替代原 /api/stock-quote API 路由（因 static export 下不支持 API 路由）
+ */
+async function fetchCrossBorderQuotes(items) {
+  const results = {};
+  for (const item of items) {
+    const idx = item._stockCode.lastIndexOf(':');
+    if (idx === -1) continue;
+    results[`${item._stockCode || item.code}:${item._market}`] = null;
+  }
+
+  const MARKET_SUFFIX = { tw: '.TW', kr: '.KS', jp: '.T' };
+  const toKey = (h) => `${h._stockCode || h.code}:${h._market}`;
+
+  // 1) Yahoo Finance（日/韩/港股）
+  const yahooItems = items.filter(h => h._market !== 'tw');
+  for (const h of yahooItems) {
+    const key = toKey(h);
+    const symbol = h._market === 'jp' ? h._stockCode : `${h._stockCode}${MARKET_SUFFIX[h._market]}`;
+    try {
+      const resp = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}?interval=1d&range=1d`, {
+        headers: { 'User-Agent': 'Mozilla/5.0' },
+        signal: AbortSignal.timeout(6000),
+      });
+      if (resp.ok) {
+        const json = await resp.json();
+        const meta = json?.chart?.result?.[0]?.meta;
+        if (meta && meta.regularMarketPrice != null && meta.previousClose != null && meta.previousClose > 0) {
+          results[key] = { change: Math.round(((meta.regularMarketPrice - meta.previousClose) / meta.previousClose) * 10000) / 100 };
+          continue;
+        }
+      }
+    } catch {}
+
+    // 日股/韩股兜底
+    if (h._market === 'jp') {
+      try {
+        const resp = await fetch(`https://stooq.com/q/l/?s=${h._stockCode}.JP&f=sd2t2ohlcvp&h&e=csv`, { signal: AbortSignal.timeout(5000) });
+        if (resp.ok) {
+          const lines = (await resp.text()).trim().split('\n');
+          if (lines.length > 1) {
+            const parts = lines[1].split(',');
+            const close = parseFloat(parts[6]);
+            const prev = parseFloat(parts[8]);
+            if (!isNaN(close) && !isNaN(prev) && prev > 0) {
+              results[key] = { change: Math.round(((close - prev) / prev) * 10000) / 100 };
+              continue;
+            }
+          }
+        }
+      } catch {}
+    } else if (h._market === 'kr') {
+      try {
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        const startDate = `${yyyy - 1}${mm}${dd}`;
+        const resp = await fetch(
+          `https://api.finance.naver.com/siseJson.naver?symbol=${h._stockCode}&requestType=1&startTime=${startDate}&endTime=${yyyy}${mm}${dd}&timeframe=day`,
+          { signal: AbortSignal.timeout(6000) },
+        );
+        if (resp.ok) {
+          const raw = await resp.text();
+          const match = raw.match(/\[.*\]/s);
+          if (match) {
+            const data = JSON.parse(match[0].replace(/'/g, '"').replace(/[\n\t\r]+/g, ''));
+            const rows = data.slice(1);
+            if (rows.length >= 2) {
+              const lc = rows[rows.length - 1][4];
+              const pc = rows[rows.length - 2][4];
+              if (lc && pc && pc > 0) {
+                results[key] = { change: Math.round(((lc - pc) / pc) * 10000) / 100 };
+                continue;
+              }
+            }
+          }
+        }
+      } catch {}
+    }
+  }
+
+  // 2) 台股：台湾证券交易所
+  const twItems = items.filter(h => h._market === 'tw');
+  if (twItems.length > 0) {
+    const codes = twItems.map(h => `tse_${h._stockCode}.tw`);
+    try {
+      const resp = await fetch(`https://mis.twse.com.tw/stock/api/getStockInfo.jsp?json=1&delay=0&ex_ch=${codes.join('|')}`, {
+        signal: AbortSignal.timeout(8000),
+      });
+      if (resp.ok) {
+        const json = await resp.json();
+        for (const item of json.msgArray || []) {
+          const z = parseFloat(item.z);
+          const y = parseFloat(item.y);
+          if (!isNaN(z) && !isNaN(y) && y > 0) {
+            results[`${item.c}:tw`] = { change: Math.round(((z - y) / y) * 10000) / 100 };
+          }
+        }
+      }
+    } catch {}
+  }
+
+  return results;
+}
