@@ -623,53 +623,42 @@ async function fetchCrossBorderQuotes(items) {
     results[`${item._stockCode || item.code}:${item._market}`] = null;
   }
 
-  const MARKET_SUFFIX = { tw: '.TW', kr: '.KS', jp: '.T' };
   const toKey = (h) => `${h._stockCode || h.code}:${h._market}`;
 
-  // 1) Yahoo Finance（日/韩/港股）
-  const yahooItems = items.filter(h => h._market !== 'tw');
-  for (const h of yahooItems) {
+  // 1) 日股：Stooq（无代理直连，稳定）
+  const jpItems = items.filter(h => h._market === 'jp');
+  for (const h of jpItems) {
     const key = toKey(h);
-    const symbol = h._market === 'jp' ? h._stockCode : `${h._stockCode}${MARKET_SUFFIX[h._market]}`;
+    // h._stockCode = "4062.T" → stooq 需要 "4062.JP"
+    const stooqCode = h._stockCode.replace('.T', '.JP');
     try {
-      const resp = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}?interval=1d&range=1d`, {
-        headers: { 'User-Agent': 'Mozilla/5.0' },
-        signal: AbortSignal.timeout(6000),
-      });
+      const resp = await fetch(`https://stooq.com/q/l/?s=${stooqCode}&f=sd2t2ohlcvp&h&e=csv`, { signal: AbortSignal.timeout(5000) });
       if (resp.ok) {
-        const json = await resp.json();
-        const meta = json?.chart?.result?.[0]?.meta;
-        if (meta && meta.regularMarketPrice != null && meta.previousClose != null && meta.previousClose > 0) {
-          results[key] = { change: Math.round(((meta.regularMarketPrice - meta.previousClose) / meta.previousClose) * 10000) / 100 };
-          continue;
+        const lines = (await resp.text()).trim().split('\n');
+        if (lines.length > 1) {
+          const parts = lines[1].split(',');
+          const close = parseFloat(parts[6]);
+          const prev = parseFloat(parts[8]);
+          if (!isNaN(close) && !isNaN(prev) && prev > 0) {
+            results[key] = { change: Math.round(((close - prev) / prev) * 10000) / 100 };
+            continue;
+          }
         }
       }
     } catch {}
+  }
 
-    // 日股/韩股兜底
-    if (h._market === 'jp') {
+  // 2) 韩股：Naver Finance（直连稳定）
+  const krItems = items.filter(h => h._market === 'kr');
+  if (krItems.length > 0) {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    const startDate = `${yyyy - 1}${mm}${dd}`;
+    const promises = krItems.map(async (h) => {
+      const key = toKey(h);
       try {
-        const resp = await fetch(`https://stooq.com/q/l/?s=${h._stockCode}.JP&f=sd2t2ohlcvp&h&e=csv`, { signal: AbortSignal.timeout(5000) });
-        if (resp.ok) {
-          const lines = (await resp.text()).trim().split('\n');
-          if (lines.length > 1) {
-            const parts = lines[1].split(',');
-            const close = parseFloat(parts[6]);
-            const prev = parseFloat(parts[8]);
-            if (!isNaN(close) && !isNaN(prev) && prev > 0) {
-              results[key] = { change: Math.round(((close - prev) / prev) * 10000) / 100 };
-              continue;
-            }
-          }
-        }
-      } catch {}
-    } else if (h._market === 'kr') {
-      try {
-        const today = new Date();
-        const yyyy = today.getFullYear();
-        const mm = String(today.getMonth() + 1).padStart(2, '0');
-        const dd = String(today.getDate()).padStart(2, '0');
-        const startDate = `${yyyy - 1}${mm}${dd}`;
         const resp = await fetch(
           `https://api.finance.naver.com/siseJson.naver?symbol=${h._stockCode}&requestType=1&startTime=${startDate}&endTime=${yyyy}${mm}${dd}&timeframe=day`,
           { signal: AbortSignal.timeout(6000) },
@@ -685,13 +674,13 @@ async function fetchCrossBorderQuotes(items) {
               const pc = rows[rows.length - 2][4];
               if (lc && pc && pc > 0) {
                 results[key] = { change: Math.round(((lc - pc) / pc) * 10000) / 100 };
-                continue;
               }
             }
           }
         }
       } catch {}
-    }
+    });
+    await Promise.all(promises);
   }
 
   // 2) 台股：台湾证券交易所
